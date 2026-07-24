@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flashcard_app/flashcard_class.dart';
 
 
 
@@ -53,8 +54,20 @@ class _QuizfulHomeState extends State<QuizfulHome> {
       ), // Padding
     ); // GestureDetector
   }
+
   Widget homePage() {
-    return Placeholder();
+    return Container(
+      color: Colors.grey,
+      child: PageView(
+        children: [
+          Flashcard(
+            name: "Test",
+            question: "What is REST?",
+            answer: "A standardized software architecture style and specific API that is widely used across the industry."
+          ), // Flashcard
+        ], // Children
+      ), // Pageview
+    ); // Container
   }
 
 }

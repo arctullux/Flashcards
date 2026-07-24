@@ -4,7 +4,7 @@ import 'pages/loading.dart';
 import 'flashcard_class.dart';
 void main() {
   runApp(const QuizfulMain());
-  Flashcard newFlashcard = Flashcard(name: "")
+
 }
 
 class QuizfulMain extends StatelessWidget {
