@@ -70,7 +70,6 @@ class _FlashcardState extends State<Flashcard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 30, right: 30, top: 60, bottom: 60),
-      // TODO: add drag functionality
       child: GestureDetector(
         onTap: () {
           setState(() {
