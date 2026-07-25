@@ -58,18 +58,23 @@ class _QuizfulHomeState extends State<QuizfulHome> {
   }
 
   Widget homePage() {
-    return Container(
-      color: Color(0xff303d56),
-      child: PageView(
-        children: [
-          Flashcard(
-            name: "Test",
-            question: "What is REST?",
-            answer: "A standardized software architecture style and specific API that is widely used across the industry."
-          ), // Flashcard
-        ], // Children
-      ), // Pageview
-    ); // Container
+    return Column(
+      children: [
+        /*
+          TODO: Fix rendering issues with PageView.
+          TODO: Implement a correct/incorrect counter over the pageview, just below the appbar. OR, do it in a bottom appbar.
+         */
+        PageView(
+          children: [
+            Flashcard(
+                name: "Test",
+                question: "What is REST?",
+                answer: "A standardized software architecture style and specific API that is widely used across the industry."
+            ), // Flashcard
+          ], // Children
+        ), // PageView
+      ], // Children
+      ); // Column
   }
 
 }
