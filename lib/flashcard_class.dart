@@ -10,40 +10,6 @@
 /// It shall not exceed 5.
 
 import 'package:flutter/material.dart';
-//
-// class FlashcardData {
-//   String name = "";
-//   String question = "";
-//   String answer = "";
-//   int _flashcardID = 0;
-//   int _studyPriority = 0;
-//
-//   set flashcardID(int value) {
-//     if (value > 0) {
-//       _flashcardID = value;
-//     }
-//   }
-//
-//   get flashcardID {
-//     return _flashcardID;
-//   }
-//   set studyPriority(int value) {
-//     if (value > 5) {
-//       _studyPriority = 5;
-//     } else if (value < 0) {
-//       _studyPriority = 0;
-//     } else {
-//       _studyPriority = value;
-//     }
-//   }
-//
-//   int get studyPriority {
-//     return _studyPriority;
-//   }
-//
-//   FlashcardData({required this.name, required this.question, required this.answer, dynamic flashcardID});
-// }
-
 
 class FlashcardList {
   List<Flashcard> flashcards;
@@ -58,6 +24,7 @@ class FlashcardList {
     flashcards.remove(flashcard);
   }
 }
+
 class Flashcard extends StatefulWidget  {
   Flashcard({super.key, required this.name, required this.question, required this.answer});
 
@@ -74,6 +41,8 @@ class _FlashcardState extends State<Flashcard> {
   bool questionSideUp = true;
   int _flashcardID = 0;
   int _studyPriority = 0;
+  Color defaultColor = Color(0xff415681);
+  Color cardWhileDraggedColor = Color(0xff3c4f75);
 
   set flashcardID(int value) {
     if (value > 0) {
@@ -101,17 +70,55 @@ class _FlashcardState extends State<Flashcard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 30, right: 30, top: 60, bottom: 60),
-      child: Container(
-          height: 10.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            color: Color(0xff415681),
-          ), // BoxDecoration
-          child: Center(
-            child: questionSideUp? questionText() : answerText(),
-          ), // Center
-        ),
-    ); // Container
+      // TODO: add drag functionality
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            if (questionSideUp == true) {
+              questionSideUp = false;
+            } else {
+              questionSideUp = true;
+            }
+
+          });
+        },
+        child: Draggable<int>(
+          data: 1,
+          feedback: Container(
+            height: 600,
+            width: 425,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0),
+              color: defaultColor,
+            ), // BoxDecoration
+            child: Center(
+              child: questionSideUp ? questionText() : answerText()
+            ), // Center
+          ), // Container
+          childWhenDragging: Container(
+            height: 595,
+            width: 405,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0),
+              color: cardWhileDraggedColor,
+            ), // BoxDecoration
+          ), // Container
+          child: Container(
+            height: 600.0,
+            width: 425.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0),
+              color: defaultColor,
+            ), // BoxDecoration
+            child: Center(
+              child: questionSideUp? questionText() : answerText(),
+            ), // Center
+          ), // Container
+        ), // Draggable
+
+
+      ), // GestureDetector
+    ); // Padding
   }
 
   Widget questionText() {
@@ -123,6 +130,8 @@ class _FlashcardState extends State<Flashcard> {
           style: TextStyle(
             color: Colors.white,
             fontSize: 30.0,
+            decoration: TextDecoration.none,
+            fontWeight: FontWeight(400),
           ), // TextStyle
         ), // Text
       ); // Padding
@@ -134,6 +143,8 @@ class _FlashcardState extends State<Flashcard> {
           style: TextStyle(
             color: Colors.red,
             fontSize: 30.0,
+            decoration: TextDecoration.none,
+            fontWeight: FontWeight(400),
           ), // TextStyle
         ),
       ); // Text

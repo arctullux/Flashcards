@@ -30,11 +30,13 @@ class _QuizfulHomeState extends State<QuizfulHome> {
       title: Text(
         "Quizful",
         style: TextStyle(
-          fontWeight: FontWeight(500)
+          fontWeight: FontWeight(500),
+          color: Colors.white,
         ), // TextStyle
       ), // Text
       centerTitle: true,
       leading: ResetButton(),
+      backgroundColor: Color(0xff303d56),
     ); // AppBar
   } // !Method AppBar
   Widget ResetButton() {
@@ -45,7 +47,7 @@ class _QuizfulHomeState extends State<QuizfulHome> {
       child: Padding(
         padding: EdgeInsets.all(10.0),
         child: Container(
-          color: Color(0xffe7e0ff),
+          color: Color(0xff386585),
           child: Padding(
             padding: EdgeInsets.all(5.0),
             child: SvgPicture.asset("assets/icons/material-reset_arrow.svg"),
@@ -57,7 +59,7 @@ class _QuizfulHomeState extends State<QuizfulHome> {
 
   Widget homePage() {
     return Container(
-      color: Colors.grey,
+      color: Color(0xff303d56),
       child: PageView(
         children: [
           Flashcard(
